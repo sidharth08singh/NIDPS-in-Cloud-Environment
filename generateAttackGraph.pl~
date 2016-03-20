@@ -1,14 +1,17 @@
 #!/usr/bin/perl
 
-##################################################################################
-########## Script to generate an attack graph from Snort alert file ##############
-##################################################################################
-
 my $alertfile = '/var/log/snort/alert';
 my $sagfile = '/var/log/snort/attackgraph';
 
 open(my $fh, '<:encoding(UTF-8)', $alertfile)
 	or die "Could not open file '$alertfile' $!";
+
+#03/19-17:37:02.465116  [**] [1:10000:0] ***Alert! DOS LAND ATTACK : POSSIBLE SYN FLOOD FROM SPOOFED IP ADDRESSES*** [**] [Priority: 0] {TCP} 89.220.63.182:14352 -> 30.0.0.1:8000
+
+
+#03/20-00:46:00.231195  [**] [1:10004:0] ***Alert! SMURF ATTACK : POSSIBLE ICMP FlOODUSING SPOOFED BROADCAST PING MESSAGES*** [**] [Priority: 0] {ICMP} 10.0.0.1 -> 10.0.0.5
+
+#03/20-00:43:26.298610  [**] [1:1228:7] SCAN nmap XMAS [**] [Classification: Attempted Information Leak] [Priority: 2] {TCP} 10.0.0.1:57666 -> 10.0.0.5:8888
 
 my %mac;
 my %attackCode;
@@ -38,9 +41,6 @@ my $syn_attack_detected = 0;
 my $icmp_attack_detected = 0;
 my $nmap_scan_detected = 0;
 
-
-open (my $fh2, '>>', $sagfile);
-
 while(my $row = <$fh>) {
 	chomp $row;
 	print "Row : $row\n\n";
@@ -57,14 +57,14 @@ while(my $row = <$fh>) {
 			$dstport = $7;
 			$dstmac = $mac{$dstip};
 			print "$timestamp :: $attackType :: $proto :: $srcip :: $srcport :: $srcmac :: $dstip :: $dstport :: $dstmac\n\n";
-			#open (my $fh2, '>>', $sagfile);
+			open (my $fh2, '>>', $sagfile);
 			print $fh2 "$timestamp::$attackType::$proto::$srcip::$srcport::$srcmac::$dstip::$dstport::$dstmac\n";
-			#close($fh2);
+			close($fh2);
 			$syn_attack_detected = 1;
 		}
 	}
 
-	elsif($row =~ /$reICMP/) {
+	else if($row =~ /$reICMP/) {
 		if($icmp_attack_detected == 0) {
 			print "$1 :: $2 :: $3 :: $4 :: $5\n\n";
 			$timestamp = $1;
@@ -74,15 +74,15 @@ while(my $row = <$fh>) {
 			$srcmac = $mac{'icmp_attack'};
 			$dstip = $5;
 			$dstmac = $mac{$dstip};
-			print "ICMP Attack $timestamp :: $attackType :: $proto :: $srcip :: $srcmac :: $dstip :: $dstmac\n\n";
-			#open (my $fh2, '>>', $sagfile);
+			print "$timestamp :: $attackType :: $proto :: $srcip :: $srcmac :: $dstip :: $dstmac\n\n";
+			open (my $fh2, '>>', $sagfile);
 			print $fh2, "$timestamp::$attackType::$proto::$srcip::$srcmac::$dstip::$dstmac\n";
-			#close($fh2);
+			close($fh2);
 			$icmp_attack_detected = 1;
 		}
 	}
 
-	elsif($row =~ /$reNMAP/) {
+	else if($row =~ /$reNMAP/) {
 		if($nmap_scan_detected == 0) {
 			print "$1 :: $2 :: $3 :: $4 :: $5 :: $6 :: $7\n\n";
 			$timestamp = $1;
@@ -95,13 +95,12 @@ while(my $row = <$fh>) {
 			$dstport = $7;
 			$dstmac = $mac{$dstip};
 			print "$timestamp :: $attackType :: $proto :: $srcip :: $srcport :: $srcmac :: $dstip :: $dstport :: $dstmac\n\n";
-			#open (my $fh2, '>>', $sagfile);
+			open (my $fh2, '>>', $sagfile);
 			print $fh2 "$timestamp::$attackType::$proto::$srcip::$srcport::$srcmac::$dstip::$dstport::$dstmac\n";
-			#close($fh2);
+			close($fh2);
 			$nmap_scan_detected = 1;
 		}
 	}
 }
 
-close($fh2);
 close($fh);
