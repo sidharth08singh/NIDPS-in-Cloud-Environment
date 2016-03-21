@@ -41,22 +41,43 @@ class LoadBalancerSwitch(SimpleL2LearningSwitch):
 		self._clientip2_mac = config['client_ip2_mac']
 		self._clientip3_mac = config['client_ip3_mac']
 		self._clientip4_mac = config['client_ip4_mac']
-		
 
 		self.FLAG = 0
-		
 		self.lock1 = threading.Lock() 
-	
 		self.thread_flag = 1
 		
-		
 		#Client Threat Status - 0: Low, 1: Medium, 2: High
-		self.client1_status = 0;
-		self.client2_status = 0;
-		self.client3_status = 0;
+		self.client1_status = 0
+		self.client2_status = 0
+		self.client3_status = 0
 		
 		#Server Threat Status - 0: Low, 1: Medium, 2: High
-		self.server1_status = 0;
+		self.server1_status = 0
+
+                #Info Counters
+                self.server1_low_threat             = 0
+                self.server1_medium_threat          = 0
+                self.server1_high_threat            = 0
+
+                self.client1_low_threat             = 0
+                self.client1_medium_threat          = 0
+                self.client1_medium_threat          = 0
+
+                self.client2_low_threat             = 0
+                self.client2_medium_threat          = 0
+                self.client2_medium_threat          = 0
+
+                self.client3_low_threat             = 0
+                self.client3_medium_threat          = 0
+                self.client3_medium_threat          = 0
+
+                self.client1_traffic_blocked        = 0
+                self.client2_traffic_blocked        = 0
+                self.client3_traffic_blocked        = 0
+                self.user_traffic                   = 0
+                self.user_traffic_redirected        = 0
+                self.user_return_traffic_redirected = 0
+                self.other_traffic                  = 0
 
 	def _handle_PacketIn(self, event):
 	        #log.debug("Got a packet : " + str(event.parsed))
@@ -70,16 +91,31 @@ class LoadBalancerSwitch(SimpleL2LearningSwitch):
 		    self.thread_flag = 0
 	        
 		if packetDstIp(self.packet, self._serverip1, log):
-		    if (self.server1_status == 0): #Server 1 is in Normal Mode
-		        SimpleL2LearningSwitch._handle_PacketIn(self, event)
+		    if (self.server1_status == 0): # Server 1 is in Low Attack Threat Mode
+                        # Allow all traffic to pass through to Server 1 : Attack Traffic + Legitimate Traffic
+                        self.server1_low_threat = self.server1_low_threat + 1
+                        SimpleL2LearningSwitch._handle_PacketIn(self, event)
+                        if (self.server1_low_threat % 5000 == 0) :
+                            log.info("Server1 Low Threat Level: %d " % self.server1_low_threat)
 				
 		    elif (self.server1_status == 1): #Server 1 is in Medium Attack Threat Mode
+                        self.server1_medium_threat = self.server1_medium_threat + 1
+                        log.info("Server1 Medium Threat Level: %d " % self.server1_medium_threat)
 			if(self.packet.src == self._clientip1_mac):
 			    if (self.client1_status == 0):
+                                self.client1_low_threat = self.client1_low_threat + 1
+                                log.info("Server1 Medium Threat Level, Client1 Low Threat Level: %d " % self.client1_low_threat)
 			        SimpleL2LearningSwitch._handle_PacketIn(self, event)
-
 			    elif (self.client1_status == 1 or self.client1_status == 2): 
+                                if (self.client1_status == 1):
+                                    self.client1_medium_threat = self.client1_medium_threat + 1
+                                    log.info("Server1 Medium Threat Level, Client1 Medium Threat Level: %d " % self.client1_medium_threat)
+                                elif (self.client1_status == 2):
+                                    self.client1_high_threat = self.client1_high_threat + 1
+                                    log.info("Server1 Medium Threat Level, Client1 High Threat Level: %d " % self.client1_high_threat)
 				#Block Traffic
+                                self.client1_traffic_blocked = self.client1_traffic_blocked + 1
+                                log.info("Server1 Medium Threat Level, Client1 Attack Blocked: %d " % self.client1_traffic_blocked)
 				msg = of.ofp_flow_mod()
 				msg.priority = 20
 				msg.actions.append(of.ofp_action_output(port=of.OFPP_NONE))
@@ -93,9 +129,19 @@ class LoadBalancerSwitch(SimpleL2LearningSwitch):
 			
 			elif(self.packet.src == self._clientip2_mac):
 			    if (self.client2_status == 0):
+                                self.client2_low_threat = self.client2_low_threat + 1
+                                log.info("Server1 Medium Threat Level, Client2 Low Threat Level: %d " % self.client2_low_threat)
 			        SimpleL2LearningSwitch._handle_PacketIn(self, event)
 			    elif (self.client2_status == 1 or self.client2_status == 2): 
+                                if (self.client2_status == 1):
+                                    self.client2_medium_threat = self.client2_medium_threat + 1
+                                    log.info("Server1 Medium Threat Level, Client2 Medium Threat Level: %d " % self.client2_medium_threat)
+                                elif (self.client2_status == 2):
+                                    self.client2_high_threat = self.client2_high_threat + 1
+                                    log.info("Server1 Medium Threat Level, Client2 High Threat Level: %d " % self.client2_high_threat)
 				#Block Traffic
+                                self.client2_traffic_blocked = self.client2_traffic_blocked + 1
+                                log.info("Server1 Medium Threat Level, Client2 Attack Blocked: %d " % self.client2_traffic_blocked)
 			        msg = of.ofp_flow_mod()
 		                msg.priority = 20
 			        msg.actions.append(of.ofp_action_output(port=of.OFPP_NONE))
@@ -106,13 +152,22 @@ class LoadBalancerSwitch(SimpleL2LearningSwitch):
 			        match.nw_dst = self._serverip1
 			        msg.match = match
 			        event.connection.send(msg)
-							
 					
 			elif(self.packet.src == self._clientip3_mac):
 			    if (self.client3_status == 0):
+                                self.client3_low_threat = self.client3_low_threat + 1
+                                log.info("Server1 Medium Threat Level, Client3 Low Threat Level: %d " % self.client3_low_threat)
 			        SimpleL2LearningSwitch._handle_PacketIn(self, event)
 			    elif (self.client3_status == 1 or self.client3_status == 2): 
+                                if (self.client3_status == 1):
+                                    self.client3_medium_threat = self.client3_medium_threat + 1
+                                    log.info("Server1 Medium Threat Level, Client3 Medium Threat Level: %d " % self.client3_medium_threat)
+                                elif (self.client3_status == 2):
+                                    self.client3_high_threat = self.client3_high_threat + 1
+                                    log.info("Server1 Medium Threat Level, Client3 High Threat Level: %d " % self.client3_high_threat)
 				#Block Traffic
+                                self.client3_traffic_blocked = self.client3_traffic_blocked + 1
+                                log.info("Server1 Medium Threat Level, Client3 Attack Blocked: %d " % self.client3_traffic_blocked)
 				msg = of.ofp_flow_mod()
 			    	msg.priority = 20
 			    	msg.actions.append(of.ofp_action_output(port=of.OFPP_NONE))
@@ -125,9 +180,13 @@ class LoadBalancerSwitch(SimpleL2LearningSwitch):
 			    	event.connection.send(msg)
 					
 		        elif(self.packet.src == self._clientip4_mac):
+                            self.user_traffic = self.user_traffic + 1
+                            log.info("Server1 Medium Threat Level, User Traffic From Client4: %d " % self.user_traffic)
 		            SimpleL2LearningSwitch._handle_PacketIn(self, event) #Consider Load Balancing Here
 						
 		    elif (self.server1_status == 2): #Server 1 is in High Attack Threat Mode 
+                        self.server1_high_threat = self.server1_high_threat + 1
+                        log.info("Server1 High Threat Level: %d " % self.server1_high_threat)
 		        if(self.packet.src == self._clientip1_mac or self.packet.src == self._clientip2_mac or self.packet.src == self._clientip3_mac):
 			    #Block Traffic
 			    msg = of.ofp_flow_mod()
@@ -137,10 +196,16 @@ class LoadBalancerSwitch(SimpleL2LearningSwitch):
                             match = of.ofp_match()
 			    # policy in one direction
 			    if(self.packet.src == self._clientip1_mac):
+                                self.client1_traffic_blocked = self.client1_traffic_blocked + 1
+                                log.info("Server1 High Threat Level, Client1 Attack Blocked: %d " % self.client1_traffic_blocked)
 			        match.dl_src = self._clientip1_mac
 			    if(self.packet.src == self._clientip2_mac):
+                                self.client2_traffic_blocked = self.client2_traffic_blocked + 1
+                                log.info("Server1 High Threat Level, Client 2 Attack Blocked: %d " % self.client2_traffic_blocked)
 			        match.dl_src = self._clientip2_mac
 			    if(self.packet.src == self._clientip3_mac):
+                                self.client3_traffic_blocked = self.client3_traffic_blocked + 1
+                                log.info("Server1 High Threat Level, Client3 Attack Blocked: %d " % self.client3_traffic_blocked)
 				match.dl_src = self._clientip3_mac
 			    match.nw_dst = self._serverip1
 			    msg.match = match
@@ -149,6 +214,8 @@ class LoadBalancerSwitch(SimpleL2LearningSwitch):
 			elif(self.packet.src == self._clientip4_mac):
 		            if packetIsTCP(self.packet, log):
 			        #Redirect Traffic to Server 2; Modify Dst IP and Dst MAC 
+                                self.user_traffic_redirected = self.user_traffic_redirected + 1
+                                log.info("Server1 High Threat, Traffic from client4 redirected to Server2: %d " % self.user_traffic_redirected)
 				newaction = createOFAction(of.OFPAT_SET_DL_DST, self._serverip2_mac, log)
 				actions.append(newaction)
 				newaction = createOFAction(of.OFPAT_SET_NW_DST, self._serverip2, log)
@@ -167,6 +234,8 @@ class LoadBalancerSwitch(SimpleL2LearningSwitch):
 		elif (packetDstIp (self.packet, self._clientip4, log) and (self.packet.src == self._serverip2_mac)):
 		    if packetIsTCP(self.packet, log):
 		        # Modify Source IP and Source Mac
+                        self.user_return_traffic_redirected = self.user_return_traffic_redirected + 1
+                        log.info("Server1 High Threat, Return Traffic to client4 modified: %d " % self.user_return_traffic_redirected)
 			newaction = createOFAction(of.OFPAT_SET_DL_SRC, self._serverip1_mac, log)
 			actions.append(newaction)
 			newaction = createOFAction(of.OFPAT_SET_NW_DST, self._serverip1, log)
@@ -182,63 +251,68 @@ class LoadBalancerSwitch(SimpleL2LearningSwitch):
 	        	msg = createFlowMod(match, actions, FLOW_HARD_TIMEOUT, FLOW_IDLE_TIMEOUT, event.ofp.buffer_id)
 	        	event.connection.send(msg.pack())
 		else: 
+                    self.other_traffic = self.other_traffic + 1
+                    #log.info("Other Traffic: %d " % self.other_traffic)
 		    SimpleL2LearningSwitch._handle_PacketIn(self, event)
 			
 	
 	def parseAttackGraph(self):
 	    index = 0
 	    while 1:
+                log.info("**** Refreshing Attack Graph ****")
 	        tot_syn_attack        = 0
 		tot_icmp_attack       = 0
 	    	tot_nmap_scan         = 0
 	    	tot_server_attack     = 0 
 	    	
-	    	fh = open("/var/log/snort/attackGraph", "rw+")
+	    	fh = open("/var/log/snort/attackgraph", "rw+")
 	    	for line in iter(fh):
-        	    cur_attack = line.split(':');
+        	    cur_attack = line.split(',')
 		    if (cur_attack[1] == 0):
-		        tot_syn_attack = tot_syn_attack + 1;
-		    	tot_server_attack = tot_server_attack + 1;
+		        tot_syn_attack = tot_syn_attack + 1
+		    	tot_server_attack = tot_server_attack + 1
 		    elif (cur_attack[1] == 1):
-		    	tot_icmp_attack = tot_icmp_attack + 1;
-    			tot_server_attack = tot_server_attack + 1;
+		    	tot_icmp_attack = tot_icmp_attack + 1
+    			tot_server_attack = tot_server_attack + 1
 	    	    elif (cur_attack[1] == 2):
-	    		tot_nmap_scan = tot_nmap_scan + 1;
-			tot_server_attack = tot_server_attack + 1;
+	    		tot_nmap_scan = tot_nmap_scan + 1
+			tot_server_attack = tot_server_attack + 1
 			
 		fh.close()
+
+                log.info("**** SynAttacks:%d, PingAttacks:%d, NmapScans:%d, SvrAttack:%d ****" % (tot_syn_attack, tot_icmp_attack, tot_nmap_scan, tot_server_attack) 
 			
 		self.lock1.acquire()
 		if (tot_syn_attack < 5):
 		    self.client1_status = 0;
 		elif (tot_syn_attack > 5 and tot_syn_attack <= 10) : 
-		    self.client1_status = 1;
+		    self.client1_status = 1
 		else:
-		    self.client1_status = 2;
+		    self.client1_status = 2
 				
 		if (tot_icmp_attack < 5):
-		    self.client2_status = 0;
+		    self.client2_status = 0
 		elif (tot_icmp_attack > 5 and tot_icmp_attack <= 10) : 
-		    self.client2_status = 1;
+		    self.client2_status = 1
 		else:
-		    self.client2_status = 2;
+		    self.client2_status = 2
 				
 		if (tot_nmap_scan < 5):
-		    self.client3_status = 0;
+		    self.client3_status = 0
 		elif (tot_nmap_scan > 5 and tot_nmap_scan <= 10) : 
-		    self.client3_status = 1;
+		    self.client3_status = 1
 		else:
-		    self.client3_status = 2;
+		    self.client3_status = 2
 			
 		if (tot_server_attack < 5):
-		    self.server1_status = 0;
+		    self.server1_status = 0
 		elif (tot_server_attack > 5 and tot_server_attack <= 10) : 
-		    self.server1_status = 1;
+		    self.server1_status = 1
 		else:
-		    self.server1_status = 2;
+		    self.server1_status = 2
 		self.lock1.release()
 	
-		time.sleep(60)
+		time.sleep(20)
 			
 class LoadBalancer(object):
     def __init__(self, config):
@@ -247,8 +321,6 @@ class LoadBalancer(object):
     def _handle_ConnectionUp(self, event):
         log.debug("Connection %s" % (event.connection,))
         LoadBalancerSwitch(event.connection, self._config)
-	
-
 
 def launch(config_file=os.path.join(SCRIPT_PATH, "load.config")):
     log.debug("Starting N-IDPS " + config_file);
