@@ -1,0 +1,7 @@
+alert tcp any any -> any 8000 (flags:S; msg:"***Alert! DOS LAND ATTACK : POSSIBLE SYN FLOOD FROM SPOOFED IP ADDRESSES***"; flow:stateless; threshold: type both,track by_dst, count 70, seconds 10; sid:10000;) 
+#alert icmp any any -> any any (msg:"Alert! Host 2 is being pinged by Host 1"; icode:0; itype:8; sid:10001;)
+#alert tcp any any -> any 5001 (msg:"Alert! Host 1 is pumping IPERF traffic to Host 2"; sid:10002;)
+#alert tcp any any -> any 8000 (msg:"Alert! Host 1 is sending a GET request to the HTTP Server on Host 2"; flags:S; sid:10003;)
+alert icmp any any -> any any (msg:"***Alert! SMURF ATTACK : POSSIBLE ICMP FlOODUSING SPOOFED BROADCAST PING MESSAGES***"; itype:8; threshold: type threshold, track by_dst, count 1000, seconds 30; sid:10004;)
+alert tcp any any -> any any (msg:"***Alert! SCAN PERFORMED ON HOST***"; flow:stateless; ack:0; flags:S; ttl:>220; reference:arachnids,439; classtype:attempted-recon;sid:10005;)
+#alert icmp any any -> any any (msg:"***Alert! PING OF DEATH ATTACK : ICMP PACKET WITH PAYLOAD SIZE GREATER THAN 64K***"; itype:8; dsize:65540; sid:10006;)
