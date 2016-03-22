@@ -1,0 +1,342 @@
+POX 0.2.0 (carp) / Copyright 2011-2013 James McCauley, et al.
+INFO:core:POX 0.2.0 (carp) is up.
+INFO:openflow.of_01:[00-00-00-00-00-01 1] connected
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  0  , Client1 STATUS : 0
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  0  , Client2 STATUS : 0
+INFO:forwarding.NIDPS:**** NMAP Scans     :  0  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  0  , Server  STATUS : 0
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Legitmate_User_Traffic + Return_Traffic: 1000 
+INFO:forwarding.NIDPS:Legitmate_User_Traffic + Return_Traffic: 2000 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  1  , Client1 STATUS : 0
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  0  , Client2 STATUS : 0
+INFO:forwarding.NIDPS:**** NMAP Scans     :  0  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  1  , Server  STATUS : 0
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Legitmate_User_Traffic + Return_Traffic: 3000 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  1  , Client1 STATUS : 0
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  0  , Client2 STATUS : 0
+INFO:forwarding.NIDPS:**** NMAP Scans     :  0  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  1  , Server  STATUS : 0
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Legitmate_User_Traffic + Return_Traffic: 4000 
+INFO:forwarding.NIDPS:Legitmate_User_Traffic + Return_Traffic: 5000 
+INFO:forwarding.NIDPS:Server1_Low_Threat_Level: 5000 Client_Threats: 0, 0, 0
+INFO:forwarding.NIDPS:Legitmate_User_Traffic + Return_Traffic: 6000 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  2  , Client1 STATUS : 0
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  1  , Client2 STATUS : 0
+INFO:forwarding.NIDPS:**** NMAP Scans     :  1  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  4  , Server  STATUS : 0
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Legitmate_User_Traffic + Return_Traffic: 7000 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  3  , Client1 STATUS : 0
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  1  , Client2 STATUS : 0
+INFO:forwarding.NIDPS:**** NMAP Scans     :  2  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  6  , Server  STATUS : 1
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Server1_Medium_Threat_Level + Client1_Low_Threat_Level: 500 
+INFO:forwarding.NIDPS:Legitmate_User_Traffic + Return_Traffic: 8000 
+INFO:forwarding.NIDPS:Server1_Medium_Threat_Level + Client1_Low_Threat_Level: 1000 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  4  , Client1 STATUS : 0
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  1  , Client2 STATUS : 0
+INFO:forwarding.NIDPS:**** NMAP Scans     :  2  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  7  , Server  STATUS : 1
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Server1_Medium_Threat_Level + Client1_Low_Threat_Level: 1500 
+INFO:forwarding.NIDPS:Server1_Medium_Threat_Level + Client1_Low_Threat_Level: 2000 
+INFO:forwarding.NIDPS:Legitmate_User_Traffic + Return_Traffic: 9000 
+INFO:forwarding.NIDPS:Legitmate_User_Traffic + Return_Traffic: 10000 
+INFO:forwarding.NIDPS:Server1_Medium_Threat_Level + Client1_Low_Threat_Level: 2500 
+INFO:forwarding.NIDPS:Server1_Medium_Threat_Level + Client3_Low_Threat_Level: 500 
+INFO:forwarding.NIDPS:Server1_Medium_Threat_Level + Client3_Low_Threat_Level: 1000 
+INFO:forwarding.NIDPS:Legitmate_User_Traffic + Return_Traffic: 11000 
+INFO:forwarding.NIDPS:Legitmate_User_Traffic + Return_Traffic: 12000 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  5  , Client1 STATUS : 1
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  2  , Client2 STATUS : 1
+INFO:forwarding.NIDPS:**** NMAP Scans     :  3  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  10  , Server  STATUS : 1
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Server1_Medium_Threat_Level + Client1_Medium_Threat_Level: 500 
+INFO:forwarding.NIDPS:Server1_Medium_Threat_Level + Client1_Attack_Blocked: 500 
+INFO:forwarding.NIDPS:Server1_Medium_Threat_Level: 5000 Client_Threats : 1, 0, 0
+INFO:forwarding.NIDPS:Server1_Medium_Threat_Level + Client1_Medium_Threat_Level: 1000 
+INFO:forwarding.NIDPS:Server1_Medium_Threat_Level + Client1_Attack_Blocked: 1000 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  5  , Client1 STATUS : 1
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  2  , Client2 STATUS : 1
+INFO:forwarding.NIDPS:**** NMAP Scans     :  3  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  10  , Server  STATUS : 1
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Server1_Medium_Threat_Level + Client1_Medium_Threat_Level: 1500 
+INFO:forwarding.NIDPS:Server1_Medium_Threat_Level + Client1_Attack_Blocked: 1500 
+INFO:forwarding.NIDPS:Server1_Medium_Threat_Level + Client1_Medium_Threat_Level: 2000 
+INFO:forwarding.NIDPS:Server1_Medium_Threat_Level + Client1_Attack_Blocked: 2000 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  6  , Client1 STATUS : 1
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  2  , Client2 STATUS : 1
+INFO:forwarding.NIDPS:**** NMAP Scans     :  3  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  11  , Server  STATUS : 2
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 1 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 1 
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 2 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  6  , Client1 STATUS : 1
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  3  , Client2 STATUS : 1
+INFO:forwarding.NIDPS:**** NMAP Scans     :  3  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  12  , Server  STATUS : 2
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 2 
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 3 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 3 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  6  , Client1 STATUS : 1
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  3  , Client2 STATUS : 1
+INFO:forwarding.NIDPS:**** NMAP Scans     :  3  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  12  , Server  STATUS : 2
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 4 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 4 
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 5 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 5 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  6  , Client1 STATUS : 1
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  3  , Client2 STATUS : 1
+INFO:forwarding.NIDPS:**** NMAP Scans     :  3  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  12  , Server  STATUS : 2
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 6 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 6 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  6  , Client1 STATUS : 1
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  3  , Client2 STATUS : 1
+INFO:forwarding.NIDPS:**** NMAP Scans     :  3  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  12  , Server  STATUS : 2
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 7 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 7 
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 8 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 8 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  6  , Client1 STATUS : 1
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  3  , Client2 STATUS : 1
+INFO:forwarding.NIDPS:**** NMAP Scans     :  3  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  12  , Server  STATUS : 2
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 9 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 9 
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 10 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 10 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  6  , Client1 STATUS : 1
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  3  , Client2 STATUS : 1
+INFO:forwarding.NIDPS:**** NMAP Scans     :  3  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  12  , Server  STATUS : 2
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 11 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 11 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  6  , Client1 STATUS : 1
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  3  , Client2 STATUS : 1
+INFO:forwarding.NIDPS:**** NMAP Scans     :  3  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  12  , Server  STATUS : 2
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 12 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 12 
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 13 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 13 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  6  , Client1 STATUS : 1
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  3  , Client2 STATUS : 1
+INFO:forwarding.NIDPS:**** NMAP Scans     :  3  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  12  , Server  STATUS : 2
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 14 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 14 
+INFO:forwarding.NIDPS:Server1_High_Threat_Level: 5000 Client_Threats : 1, 0, 0
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 15 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 15 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  6  , Client1 STATUS : 1
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  3  , Client2 STATUS : 1
+INFO:forwarding.NIDPS:**** NMAP Scans     :  3  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  12  , Server  STATUS : 2
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 16 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 16 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  6  , Client1 STATUS : 1
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  3  , Client2 STATUS : 1
+INFO:forwarding.NIDPS:**** NMAP Scans     :  3  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  12  , Server  STATUS : 2
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 17 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 17 
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 18 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 18 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  6  , Client1 STATUS : 1
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  3  , Client2 STATUS : 1
+INFO:forwarding.NIDPS:**** NMAP Scans     :  3  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  12  , Server  STATUS : 2
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 19 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 19 
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 20 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 20 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  6  , Client1 STATUS : 1
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  3  , Client2 STATUS : 1
+INFO:forwarding.NIDPS:**** NMAP Scans     :  3  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  12  , Server  STATUS : 2
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 21 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 21 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  6  , Client1 STATUS : 1
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  3  , Client2 STATUS : 1
+INFO:forwarding.NIDPS:**** NMAP Scans     :  3  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  12  , Server  STATUS : 2
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 22 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 22 
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 23 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 23 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  6  , Client1 STATUS : 1
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  3  , Client2 STATUS : 1
+INFO:forwarding.NIDPS:**** NMAP Scans     :  3  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  12  , Server  STATUS : 2
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 24 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 24 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  6  , Client1 STATUS : 1
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  3  , Client2 STATUS : 1
+INFO:forwarding.NIDPS:**** NMAP Scans     :  3  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  12  , Server  STATUS : 2
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 25 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 25 
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 26 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 26 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  6  , Client1 STATUS : 1
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  3  , Client2 STATUS : 1
+INFO:forwarding.NIDPS:**** NMAP Scans     :  3  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  12  , Server  STATUS : 2
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 27 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 27 
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 28 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 28 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  6  , Client1 STATUS : 1
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  3  , Client2 STATUS : 1
+INFO:forwarding.NIDPS:**** NMAP Scans     :  3  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  12  , Server  STATUS : 2
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 29 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 29 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  6  , Client1 STATUS : 1
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  3  , Client2 STATUS : 1
+INFO:forwarding.NIDPS:**** NMAP Scans     :  3  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  12  , Server  STATUS : 2
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 30 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 30 
+INFO:forwarding.NIDPS:Server1_High_Threat_Level: 10000 Client_Threats : 1, 0, 0
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 31 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 31 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  6  , Client1 STATUS : 1
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  3  , Client2 STATUS : 1
+INFO:forwarding.NIDPS:**** NMAP Scans     :  3  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  12  , Server  STATUS : 2
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 32 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 32 
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 33 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 33 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  6  , Client1 STATUS : 1
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  3  , Client2 STATUS : 1
+INFO:forwarding.NIDPS:**** NMAP Scans     :  3  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  12  , Server  STATUS : 2
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 34 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 34 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  6  , Client1 STATUS : 1
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  3  , Client2 STATUS : 1
+INFO:forwarding.NIDPS:**** NMAP Scans     :  3  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  12  , Server  STATUS : 2
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 35 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 35 
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 36 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 36 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  6  , Client1 STATUS : 1
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  3  , Client2 STATUS : 1
+INFO:forwarding.NIDPS:**** NMAP Scans     :  3  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  12  , Server  STATUS : 2
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:Server1_High_Threat + Traffic_from_client4_Redirected_to_Server2: 37 
+INFO:forwarding.NIDPS:Server1_High_Threat + Return_Traffic_to_client4_modified: 37 
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  6  , Client1 STATUS : 1
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  3  , Client2 STATUS : 1
+INFO:forwarding.NIDPS:**** NMAP Scans     :  3  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  12  , Server  STATUS : 2
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:#### Refreshing Attack Graph ####
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:forwarding.NIDPS:**** Syn Attacks    :  6  , Client1 STATUS : 1
+INFO:forwarding.NIDPS:**** ICMP Attacks   :  3  , Client2 STATUS : 1
+INFO:forwarding.NIDPS:**** NMAP Scans     :  3  , Client3 STATUS : 0
+INFO:forwarding.NIDPS:**** Server Attacks :  12  , Server  STATUS : 2
+INFO:forwarding.NIDPS:*******************************************************************************************
+INFO:core:Going down...
+INFO:openflow.of_01:[00-00-00-00-00-01 1] disconnected
+INFO:core:Down.
