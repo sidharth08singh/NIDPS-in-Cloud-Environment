@@ -80,10 +80,12 @@ class LoadBalancerSwitch(SimpleL2LearningSwitch):
                 self.other_traffic                  = 0
 
 	def _handle_PacketIn(self, event):
-	        #log.debug("Got a packet : " + str(event.parsed))
+                inport = event.port
 	        self.packet = event.parsed
 	        self.event = event
 	        self.macLearningHandle()
+
+                actions = []
 		
 	        if self.thread_flag == 1:
 		    thr1 = threading.Thread(target = self.parseAttackGraph)
@@ -96,12 +98,14 @@ class LoadBalancerSwitch(SimpleL2LearningSwitch):
                         self.server1_low_threat = self.server1_low_threat + 1
                         SimpleL2LearningSwitch._handle_PacketIn(self, event)
                         if (self.server1_low_threat % 5000 == 0) :
-                            log.info("Server1 Low Threat Level: %d " % self.server1_low_threat)
+                            log.info("Server1 Low Threat Level: %d Client Threats : %d, %d, %d" %(self.server1_low_threat, self.client1_status, self.client2_status, self.client3_status))
 				
 		    elif (self.server1_status == 1): #Server 1 is in Medium Attack Threat Mode
+                        #log.info("Packet SRC MAC: %s" %(self.packet.src))
                         self.server1_medium_threat = self.server1_medium_threat + 1
-                        log.info("Server1 Medium Threat Level: %d " % self.server1_medium_threat)
-			if(self.packet.src == self._clientip1_mac):
+                        if (self.server1_medium_threat % 5000 == 0) :
+                            log.info("Server1 Medium Threat Level: %d Client Threats : %d, %d, %d" %(self.server1_medium_threat, self.client1_status, self.client2_status, self.client3_status))
+			if(str(self.packet.src) == str(self._clientip1_mac)):
 			    if (self.client1_status == 0):
                                 self.client1_low_threat = self.client1_low_threat + 1
                                 log.info("Server1 Medium Threat Level, Client1 Low Threat Level: %d " % self.client1_low_threat)
@@ -120,14 +124,15 @@ class LoadBalancerSwitch(SimpleL2LearningSwitch):
 				msg.priority = 20
 				msg.actions.append(of.ofp_action_output(port=of.OFPP_NONE))
 				# create generic match
-				match = of.ofp_match()
+				#match = of.ofp_match()
 			        # policy in one direction
-				match.dl_src = self._clientip1_mac
-				match.nw_dst = self._serverip1
+				#match.dl_src = self._clientip1_mac
+				#match.nw_dst = self._serverip1
+				match = getFullMatch(self.packet, inport)
 				msg.match = match
 	    			event.connection.send(msg)
 			
-			elif(self.packet.src == self._clientip2_mac):
+			elif(str(self.packet.src) == str(self._clientip2_mac)):
 			    if (self.client2_status == 0):
                                 self.client2_low_threat = self.client2_low_threat + 1
                                 log.info("Server1 Medium Threat Level, Client2 Low Threat Level: %d " % self.client2_low_threat)
@@ -146,14 +151,15 @@ class LoadBalancerSwitch(SimpleL2LearningSwitch):
 		                msg.priority = 20
 			        msg.actions.append(of.ofp_action_output(port=of.OFPP_NONE))
 			        # create generic match
-			        match = of.ofp_match()
+			        #match = of.ofp_match()
 			        # policy in one direction
-			        match.dl_src = self._clientip2_mac
-			        match.nw_dst = self._serverip1
+			        #match.dl_src = self._clientip2_mac
+			        #match.nw_dst = self._serverip1
+				match = getFullMatch(self.packet, inport)
 			        msg.match = match
 			        event.connection.send(msg)
 					
-			elif(self.packet.src == self._clientip3_mac):
+			elif(str(self.packet.src) == str(self._clientip3_mac)):
 			    if (self.client3_status == 0):
                                 self.client3_low_threat = self.client3_low_threat + 1
                                 log.info("Server1 Medium Threat Level, Client3 Low Threat Level: %d " % self.client3_low_threat)
@@ -172,46 +178,50 @@ class LoadBalancerSwitch(SimpleL2LearningSwitch):
 			    	msg.priority = 20
 			    	msg.actions.append(of.ofp_action_output(port=of.OFPP_NONE))
 			    	# create generic match
-			    	match = of.ofp_match()
+			    	#match = of.ofp_match()
 			    	# policy in one direction
-			    	match.dl_src = self._clientip3_mac
-			    	match.nw_dst = self._serverip1
+			    	#match.dl_src = self._clientip3_mac
+			    	#match.nw_dst = self._serverip1
+				match = getFullMatch(self.packet, inport)
 			    	msg.match = match
 			    	event.connection.send(msg)
 					
-		        elif(self.packet.src == self._clientip4_mac):
+		        elif(str(self.packet.src) == str(self._clientip4_mac)):
                             self.user_traffic = self.user_traffic + 1
                             log.info("Server1 Medium Threat Level, User Traffic From Client4: %d " % self.user_traffic)
 		            SimpleL2LearningSwitch._handle_PacketIn(self, event) #Consider Load Balancing Here
 						
 		    elif (self.server1_status == 2): #Server 1 is in High Attack Threat Mode 
                         self.server1_high_threat = self.server1_high_threat + 1
-                        log.info("Server1 High Threat Level: %d " % self.server1_high_threat)
-		        if(self.packet.src == self._clientip1_mac or self.packet.src == self._clientip2_mac or self.packet.src == self._clientip3_mac):
+                        #if (self.server1_high_threat % 5000 == 0) :
+                        log.info("Server1 High Threat Level: %d Client Threats : %d, %d, %d" %(self.server1_high_threat, self.client1_status, self.client2_status, self.client3_status))
+		        if(str(self.packet.src) == str(self._clientip1_mac) or str(self.packet.src) == str(self._clientip2_mac) or str(self.packet.src) == str(self._clientip3_mac)):
 			    #Block Traffic
 			    msg = of.ofp_flow_mod()
 	    		    msg.priority = 20
 	    		    msg.actions.append(of.ofp_action_output(port=of.OFPP_NONE))	
 			    # create generic match
-                            match = of.ofp_match()
+                            #match = of.ofp_match()
 			    # policy in one direction
 			    if(self.packet.src == self._clientip1_mac):
                                 self.client1_traffic_blocked = self.client1_traffic_blocked + 1
                                 log.info("Server1 High Threat Level, Client1 Attack Blocked: %d " % self.client1_traffic_blocked)
-			        match.dl_src = self._clientip1_mac
+			        #match.dl_src = self._clientip1_mac
 			    if(self.packet.src == self._clientip2_mac):
                                 self.client2_traffic_blocked = self.client2_traffic_blocked + 1
                                 log.info("Server1 High Threat Level, Client 2 Attack Blocked: %d " % self.client2_traffic_blocked)
-			        match.dl_src = self._clientip2_mac
+			        #match.dl_src = self._clientip2_mac
 			    if(self.packet.src == self._clientip3_mac):
                                 self.client3_traffic_blocked = self.client3_traffic_blocked + 1
                                 log.info("Server1 High Threat Level, Client3 Attack Blocked: %d " % self.client3_traffic_blocked)
-				match.dl_src = self._clientip3_mac
-			    match.nw_dst = self._serverip1
+				#match.dl_src = self._clientip3_mac
+			    #match.nw_dst = self._serverip1
+			    match = getFullMatch(self.packet, inport)
 			    msg.match = match
 			    event.connection.send(msg)
 						
-			elif(self.packet.src == self._clientip4_mac):
+			elif(str(self.packet.src) == str(self._clientip4_mac)):
+                            log.info("Reached Here");
 		            if packetIsTCP(self.packet, log):
 			        #Redirect Traffic to Server 2; Modify Dst IP and Dst MAC 
                                 self.user_traffic_redirected = self.user_traffic_redirected + 1
@@ -219,40 +229,42 @@ class LoadBalancerSwitch(SimpleL2LearningSwitch):
 				newaction = createOFAction(of.OFPAT_SET_DL_DST, self._serverip2_mac, log)
 				actions.append(newaction)
 				newaction = createOFAction(of.OFPAT_SET_NW_DST, self._serverip2, log)
-				#log.debug("MAC %s IP %s"%(self._serverip1_mac,self._serverip1))
 				actions.append(newaction)
-				out_port = 7 ##Check the correct port here
+				newaction = createOFAction(of.OFPAT_SET_TP_DST, 8001, log)
+				actions.append(newaction)
+				out_port = 7 ## Outport 7 on OpenVSwitch is connected to Server 2
 				newaction = createOFAction(of.OFPAT_OUTPUT, out_port, log)
 				actions.append(newaction)
-				match = of.ofp_match()
-				match.nw_src = self._clientip4
-				match.dl_src = self._clientip4_mac
-				#match = getFullMatch(self.packet, inport)
+				#match = of.ofp_match()
+				#match.dl_src = str(self._clientip4_mac)
+				#match.nw_src = str(self._clientip4)
+				match = getFullMatch(self.packet, inport)
 				msg = createFlowMod(match, actions, FLOW_HARD_TIMEOUT, FLOW_IDLE_TIMEOUT, event.ofp.buffer_id)
 				event.connection.send(msg.pack())
 			
-		elif (packetDstIp (self.packet, self._clientip4, log) and (self.packet.src == self._serverip2_mac)):
+		elif (packetDstIp (self.packet, self._clientip4, log) and (str(self.packet.src) == str(self._serverip2_mac))):
 		    if packetIsTCP(self.packet, log):
 		        # Modify Source IP and Source Mac
                         self.user_return_traffic_redirected = self.user_return_traffic_redirected + 1
                         log.info("Server1 High Threat, Return Traffic to client4 modified: %d " % self.user_return_traffic_redirected)
 			newaction = createOFAction(of.OFPAT_SET_DL_SRC, self._serverip1_mac, log)
 			actions.append(newaction)
-			newaction = createOFAction(of.OFPAT_SET_NW_DST, self._serverip1, log)
-			#log.debug("MAC %s IP %s"%(self._serverip1_mac,self._serverip1))
+			newaction = createOFAction(of.OFPAT_SET_NW_SRC, self._serverip1, log)
 			actions.append(newaction)
-			out_port = 4 ##Check the correct port here
+			newaction = createOFAction(of.OFPAT_SET_TP_SRC, 8000, log)
+			actions.append(newaction)
+			out_port = 4 ## Outport 4 on OpenVSwitch is connected to Client 4 
 			newaction = createOFAction(of.OFPAT_OUTPUT, out_port, log)
 			actions.append(newaction)
-			match = of.ofp_match()
-			match.nw_src = self._serverip2
-			match.dl_src = self._serverip2_mac
-			#match = getFullMatch(self.packet, inport)
+			#match = of.ofp_match()
+			#match.dl_src = str(self._serverip2_mac)
+			#match.nw_src = str(self._serverip2)
+			match = getFullMatch(self.packet, inport)
 	        	msg = createFlowMod(match, actions, FLOW_HARD_TIMEOUT, FLOW_IDLE_TIMEOUT, event.ofp.buffer_id)
 	        	event.connection.send(msg.pack())
 		else: 
                     self.other_traffic = self.other_traffic + 1
-                    #log.info("Other Traffic: %d " % self.other_traffic)
+                    log.info("Other Traffic: %d " % self.other_traffic)
 		    SimpleL2LearningSwitch._handle_PacketIn(self, event)
 			
 	
@@ -267,50 +279,59 @@ class LoadBalancerSwitch(SimpleL2LearningSwitch):
 	    	
 	    	fh = open("/var/log/snort/attackgraph", "rw+")
 	    	for line in iter(fh):
+                    #print ("Parsing Attack %s : " % line)
         	    cur_attack = line.split(',')
-		    if (cur_attack[1] == 0):
+                    #print ("Attack type found : " + cur_attack[1])
+		    if (int(cur_attack[1]) == 0):
+                        #log.info ("Here incrementing type syn attack");
 		        tot_syn_attack = tot_syn_attack + 1
 		    	tot_server_attack = tot_server_attack + 1
-		    elif (cur_attack[1] == 1):
+		    elif (int(cur_attack[1]) == 1):
 		    	tot_icmp_attack = tot_icmp_attack + 1
     			tot_server_attack = tot_server_attack + 1
-	    	    elif (cur_attack[1] == 2):
+	    	    elif (int(cur_attack[1]) == 2):
 	    		tot_nmap_scan = tot_nmap_scan + 1
 			tot_server_attack = tot_server_attack + 1
 			
 		fh.close()
 
-                log.info("**** SynAttacks:%d, PingAttacks:%d, NmapScans:%d, SvrAttack:%d ****" % (tot_syn_attack, tot_icmp_attack, tot_nmap_scan, tot_server_attack) 
+                log.info('**** SynAttacks: %d' %(tot_syn_attack))
+                log.info('**** PingAttacks: %d' %(tot_icmp_attack))
+                log.info('**** NmapScans: %d' %(tot_nmap_scan))
+                log.info('**** SvrAttack: %d' %(tot_server_attack))
 			
-		self.lock1.acquire()
-		if (tot_syn_attack < 5):
+		if (tot_syn_attack < 5) :
 		    self.client1_status = 0;
-		elif (tot_syn_attack > 5 and tot_syn_attack <= 10) : 
+		elif (tot_syn_attack >= 5 and tot_syn_attack <= 10) : 
 		    self.client1_status = 1
 		else:
 		    self.client1_status = 2
 				
 		if (tot_icmp_attack < 5):
 		    self.client2_status = 0
-		elif (tot_icmp_attack > 5 and tot_icmp_attack <= 10) : 
+		elif (tot_icmp_attack >= 5 and tot_icmp_attack <= 10) : 
 		    self.client2_status = 1
 		else:
 		    self.client2_status = 2
 				
 		if (tot_nmap_scan < 5):
 		    self.client3_status = 0
-		elif (tot_nmap_scan > 5 and tot_nmap_scan <= 10) : 
+		elif (tot_nmap_scan >= 5 and tot_nmap_scan <= 10) : 
 		    self.client3_status = 1
 		else:
 		    self.client3_status = 2
 			
 		if (tot_server_attack < 5):
 		    self.server1_status = 0
-		elif (tot_server_attack > 5 and tot_server_attack <= 10) : 
+		elif (tot_server_attack >= 5 and tot_server_attack <= 10) : 
 		    self.server1_status = 1
 		else:
 		    self.server1_status = 2
-		self.lock1.release()
+
+                log.info('**** Server 1 STATUS : %d' %(self.server1_status))
+                log.info('**** Client 1 STATUS : %d' %(self.client1_status))
+                log.info('**** Client 2 STATUS : %d' %(self.client2_status))
+                log.info('**** Client 3 STATUS : %d' %(self.client3_status))
 	
 		time.sleep(20)
 			
